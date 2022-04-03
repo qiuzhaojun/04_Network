@@ -1,0 +1,120 @@
+前情回顾
+
+1. 项目开发流程
+
+2. GIT
+
+   概述 ：  4个部分   配置
+
+   GIT 基本命令： add/mv/rm  commit  status  log
+
+   版本管理 ： reset    reflog    tag
+
+   工作区保存 ：  stash   apply
+
+   分支管理 ： branch   checkout   merge
+
+3. GitHub
+
+   获取项目 地址： https   ssh
+   git clone xxxxxx
+
+在线词典
+
+1. 需求分析
+
+2. 技术分析
+
+   * 并发模型 ： process 多进程并发
+   * 网络 ： tcp
+   * 两个界面如何跳转  写 demo
+   * 数据存储： 数据库 dict
+     设计数据表--》 建表
+
+     words --> id   word   mean
+
+     user  --> id   name   passwd
+
+     create table user (
+     id int primary key auto_increment,
+     name varchar(30) not null,
+     passwd char(64) not null);
+
+     history --> id  word  time  user_id
+
+     create table history (
+     id int primary key auto_increment,
+     word varchar(30),
+     time datetime default now(),
+     user_id int,
+     foreign key (user_id) references user(id));
+
+     select user.name,words.word,time
+     from user inner join history on user.id=history.user_id
+     left join words on histor.words_id=words.id
+     where user.name = "Tom"
+     order by time desc
+     limit 10;
+
+3. 功能模块 和 封装结构
+
+   * 多进程tcp并发模型
+   * 注册
+   * 登录
+   * 查单词
+   * 历史记录
+
+   客户端： 发起请求 得到结果 结果展示
+
+   服务端 : 接收请求 逻辑处理  结果发送
+
+           数据处理，数据存储和提取
+
+   MVC ：　M 数据模型  V 视图   C 逻辑控制
+
+
+
+4. 通信协议
+             请求类型     请求参数
+      登录     L         name  passwd
+      注册     R         name  passwd
+      查词     Q         name  word
+      历史     H         name
+      退出     E
+
+
+5. 分结构设计逻辑编程
+
+   * 多进程tcp并发模型
+   * 注册
+        客户端： 输入用户名密码
+                发送请求
+                等待反馈
+                Yes 成功
+                No  失败
+
+        服务端： 接收请求
+                判断是否允许注册
+                发送反馈
+                Yes 存储用户
+                No  over
+
+
+
+   * 登录
+   * 查单词
+   * 历史记录
+
+
+
+作业： 独立完成在线词典
+
+
+
+
+
+
+
+
+
+
